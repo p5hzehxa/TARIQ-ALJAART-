@@ -1,0 +1,7 @@
+@use "partials/menu";
+@use "partials/nav";
+
+/* Specific to router views */
+@use "company";
+@use "index";
+@use "user";
