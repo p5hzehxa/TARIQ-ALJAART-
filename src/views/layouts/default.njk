@@ -1,0 +1,84 @@
+{% extends "layouts/ch-template.njk" %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/cookie-banner/macro.njk" import govukCookieBanner %}
+{% from "govuk/components/skip-link/macro.njk" import govukSkipLink %}
+{% from "govuk/components/header/macro.njk" import govukHeader %}
+{% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% from "govuk/components/service-navigation/macro.njk" import govukServiceNavigation %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/css/app.min.css" />
+{% endblock %}
+
+{% block bodyEnd %}
+    {{ super() }}
+    <script src="{{ cdnHost }}/javascripts/app/cookie-consent/cookie-consent-1.0.0.js"></script>
+    <script src="{{ cdnHost }}/javascripts/app/cookie-consent/piwik-only-cookie-consent.js"></script>
+    <script src="/js/app.min.js"></script>
+{% endblock %}
+
+{% block bodyStart %}
+    {% include "partials/cookie-banner.njk" %}
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukPhaseBanner({
+    tag: {
+      text: "Alpha"
+    },
+    html: 'This is a new service – your <a class="govuk-link" href="#">feedback</a> will help us to improve it.'
+  }) }}
+{% endblock %}
+
+{% block header %}
+    {{ govukHeader({
+        classes: "govuk-header--full-width-border",
+        homepageUrl: "/"
+    }) }}
+    {{ govukServiceNavigation({
+        serviceName: "Companies House",
+        serviceUrl: "/",
+        navigation: [
+            {
+                href: "/company/create",
+                text: "Create a company"
+            },
+            {
+                href: "/user/profile",
+                text: "Profile"
+            },
+            {
+                href: "/user/settings",
+                text: "Settings"
+            }
+        ]
+    }) }}
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({
+    meta: {
+      items: [
+        {
+          href: "#",
+          text: "Help"
+        },
+        {
+          href: "#",
+          text: "Cookies"
+        },
+        {
+          href: "#",
+          text: "Contact"
+        },
+        {
+          href: "#",
+          text: "Terms and conditions"
+        }
+      ]
+    }
+  }) }}
+{% endblock %}

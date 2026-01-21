@@ -1,0 +1,73 @@
+{% extends "layouts/default.njk" %}
+
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/fieldset/macro.njk" import govukFieldset %}
+{% from "govuk/components/notification-banner/macro.njk" import govukNotificationBanner %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if errors %}
+        {% include "partials/error-summary.njk" %}
+      {% endif %}
+
+      {% if dataSaved %}
+        {% set html %}
+          <h2 class="govuk-notification-banner__heading">
+            Company details saved
+          </h2>
+        {% endset %}
+        {{ govukNotificationBanner({
+          type: "Success",
+          html: html
+        }) }}
+      {% endif %}
+
+      {% call govukFieldset({
+        legend: {
+          text: "Create a company",
+          classes: "govuk-fieldset__legend--l",
+          isPageHeading: true
+        }
+      }) %}
+        <form action="/company/create" method="post" enctype="application/json">
+          {{ govukInput({
+            label: {
+              text: "Company name"
+            },
+            id: "companyName",
+            name: "companyName",
+            errorMessage: {
+              text: errors.companyName.inline
+            } if errors.companyName
+          }) }}
+          {{ govukInput({
+            label: {
+              text: "Company email"
+            },
+            id: "email",
+            name: "email",
+            errorMessage: {
+              text: errors.email.inline
+            } if errors.email
+          }) }}
+          {{ govukTextarea({
+            label: {
+              text: "Company description"
+            },
+            id: "description",
+            name: "description",
+            errorMessage: {
+              text: errors.description.inline
+            } if errors.description
+          }) }}
+          {{ govukButton({
+            text: "Submit"
+          }) }}
+        </form>
+      {% endcall %}
+    </div>
+  </div>
+{% endblock %}
