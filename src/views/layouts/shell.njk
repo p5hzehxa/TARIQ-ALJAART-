@@ -1,0 +1,26 @@
+{# Extends the Companies House Page Template: https://github.com/companieshouse/ch-node-utils/blob/2.0.0/docs/page-template.md #}
+{% extends "ch-node-utils/templates/layouts/template.njk" %}
+
+{% block pageTitle %}{{ title }}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  {% include "partials/__meta_header.njk" %}
+{% endblock %}
+
+{% block header %}
+  {% include "partials/__header.njk" %}
+{% endblock %}
+
+{% block content %}
+    {% block main_content %}{% endblock %}
+{% endblock %}
+
+{% block footer %}
+  {% include "partials/__footer.njk" %}
+{% endblock %}
+
+{% block bodyEnd %}
+  {{ super() }}
+  {% include "partials/__meta_footer.njk" %}
+{% endblock %}
